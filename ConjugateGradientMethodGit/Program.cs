@@ -44,7 +44,7 @@ namespace ConjugateGradientMethodGit
         }
         static double f(double[] X)
         {
-            double result = 100 * Sqr(Sqr(X[0]) - X[1]) + Sqr(1 - X[0]);
+            double result = 100 * Sqr(Sqr(X[0]) - X[1]) + Sqr(1 - X[0]) ;
             return result;
         }
 
