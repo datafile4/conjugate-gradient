@@ -20,17 +20,22 @@ namespace ConjugateGradientMethodGit
 
             double[] X0 = new double[N];
             double[] result = new double[N];
-            Console.Write("Enter X0: ");
-            X0[0] = double.Parse(Console.ReadLine());
-            Console.Write("Enter X1: ");
-            X0[1] = double.Parse(Console.ReadLine());
-
+            for(int i = 0; i<N; i++)
+            {
+                Console.Write("Enter X{0} ",i);
+                X0[i] = double.Parse(Console.ReadLine());
+            }
             Console.Write("Enter t: ");
             double t = double.Parse(Console.ReadLine());
             Console.Write("Enter tau: ");
             double tau = double.Parse(Console.ReadLine());
+
             ConjugateGradient(X0, ref result, t, tau);
-            Console.WriteLine("{0}  {1}", result[0], result[1]);
+         
+            for(int i = 0; i<N; i++)
+            {
+                Console.Write("{0} ", result[i]);
+            }
             Console.ReadKey();
         }
         public static double Sqr(double x)
@@ -39,7 +44,6 @@ namespace ConjugateGradientMethodGit
         }
         static double f(double[] X)
         {
-
             double result = 100 * Sqr(Sqr(X[0]) - X[1]) + Sqr(1 - X[0]);
             return result;
         }
@@ -59,21 +63,18 @@ namespace ConjugateGradientMethodGit
         {
             double h = 0.001;
             double result;
-            X[0] = X[0] + h;
-            double f1 = f(X);
-            X[0] = X[0] - 2 * h;
-            double f2 = f(X);
-            result = 0.5 * (f1 - f2) / h;
-            res[0] = result;
-            X[0] = X[0] + h;
-
-            X[1] = X[1] + h;
-            f1 = f(X);
-            X[1] = X[1] - 2 * h;
-            f2 = f(X);
-            result = 0.5 * (f1 - f2) / h;
-            res[1] = result;
-            X[1] = X[1] + h;
+            double f1;
+            double f2;
+            for (int i = 0; i<N; i++)
+            {
+                X[i] = X[i] + h;
+                f1 = f(X);
+                X[i] = X[i] - 2 * h;
+                f2 = f(X);
+                result = 0.5 * (f1 - f2) / h;
+                res[i] = result;
+                X[i] = X[i] + h;
+            }
         }
 
         //одномерная оптимизация
